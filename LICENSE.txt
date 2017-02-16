@@ -1,0 +1,7 @@
+Copyright (c) 2016-2017 PC-EFTPOS Pty Ltd 
+ 
+All rights reserved. 
+ 
+PCEFTPOS.PayAtTable can not be modified and/or distributed without the express permission of PC-EFTPOS Pty Ltd.
+ 
+Please contact PC-EFTPOS Pty Ltd for more information on licensing this solution. 
