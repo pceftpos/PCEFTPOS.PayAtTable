@@ -60,14 +60,6 @@ namespace PayAtTable.TestPos.ViewModels
 
         public LogData SelectedData { get; set; } = null;
 
-        //public ObservableCollection<JToken> JsonData { get; set; } = new ObservableCollection<JToken>();
-
-        //public string CsdReservedString2 { get; set; } = "EFTPOS";
-        //public string TxnType { get; set; } = "P";
-
-        //public bool IsMultipleTenderTypes { get; set; } = false;
-        //public bool IsMultiplPrintOptions { get; set; } = false;
-
         public Dictionary<string, string> TxnTypes { get; set; } = new Dictionary<string, string>();
         public Server.Data.SettingsOptions Options { get; set; } = new Server.Data.SettingsOptions();
 
