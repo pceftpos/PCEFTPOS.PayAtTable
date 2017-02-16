@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.TestPos", "PayAtTable.TestPos\PayAtTable.TestPos.csproj", "{F101A17A-620F-4E2C-BE61-1399E46F1458}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A} = {1E97E03E-97C4-4D0A-94AE-9C41190C646A}
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74} = {1332295C-F939-4CB4-AB2A-44EBC6B09B74}
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912} = {115D3EAA-369F-4C11-B10B-A29ABA84D912}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.Shared", "PayAtTable.API.Shared\PayAtTable.Shared.csproj", "{115D3EAA-369F-4C11-B10B-A29ABA84D912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.Server.DemoRepository", "PayAtTable.API.DemoRepositoryImpl\PayAtTable.Server.DemoRepository.csproj", "{1E97E03E-97C4-4D0A-94AE-9C41190C646A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.API.Models", "PayAtTable.API.Models\PayAtTable.API.Models.csproj", "{1332295C-F939-4CB4-AB2A-44EBC6B09B74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.TestPos.IPInterface", "PayAtTable.TestPos.IPInterface\PayAtTable.TestPos.IPInterface.csproj", "{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Debug|x86.ActiveCfg = Debug|x86
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Debug|x86.Build.0 = Debug|x86
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Release|x86.ActiveCfg = Release|x86
+		{F101A17A-620F-4E2C-BE61-1399E46F1458}.Release|x86.Build.0 = Release|x86
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Debug|x86.ActiveCfg = Debug|x86
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Debug|x86.Build.0 = Debug|x86
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|x86.ActiveCfg = Release|x86
+		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|x86.Build.0 = Release|x86
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Debug|x86.ActiveCfg = Debug|x86
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Debug|x86.Build.0 = Debug|x86
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Release|x86.ActiveCfg = Release|x86
+		{1E97E03E-97C4-4D0A-94AE-9C41190C646A}.Release|x86.Build.0 = Release|x86
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|x86.ActiveCfg = Debug|x86
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|x86.Build.0 = Debug|x86
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|x86.ActiveCfg = Release|x86
+		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|x86.Build.0 = Release|x86
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Debug|x86.Build.0 = Debug|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Release|x86.ActiveCfg = Release|Any CPU
+		{F9091FCD-8E33-45C8-9AEF-D52B9FB18D06}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pceftpos.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PayAtTable.TestPos\\PayAtTable.TestPos.csproj
+		SccProjectName1 = PayAtTable.TestPos
+		SccLocalPath1 = PayAtTable.TestPos
+		SccProjectUniqueName2 = PayAtTable.API.Shared\\PayAtTable.Shared.csproj
+		SccProjectName2 = PayAtTable.API.Shared
+		SccLocalPath2 = PayAtTable.API.Shared
+		SccProjectUniqueName3 = PayAtTable.API.DemoRepositoryImpl\\PayAtTable.Server.DemoRepository.csproj
+		SccProjectName3 = PayAtTable.API.DemoRepositoryImpl
+		SccLocalPath3 = PayAtTable.API.DemoRepositoryImpl
+		SccProjectUniqueName4 = PayAtTable.API.Models\\PayAtTable.API.Models.csproj
+		SccProjectName4 = PayAtTable.API.Models
+		SccLocalPath4 = PayAtTable.API.Models
+		SccProjectUniqueName5 = PayAtTable.TestPos.IPInterface\\PayAtTable.TestPos.IPInterface.csproj
+		SccProjectName5 = PayAtTable.TestPos.IPInterface
+		SccLocalPath5 = PayAtTable.TestPos.IPInterface
+	EndGlobalSection
+EndGlobal
