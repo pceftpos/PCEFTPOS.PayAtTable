@@ -276,11 +276,6 @@ namespace PayAtTable.TestPos.IPInterface
         async Task HandleEFTPOSCommand(POSAPIMsg request)
         {
             var patRequest = JsonConvert.DeserializeObject<PATRequest>(request.Content);
-            //if (patRequest == null || patRequest.Tender == null)
-            //{
-            //    _logger.Log($"Invalid Request found in: {request.Header.RequestType} {request.Header.RequestMethod}", LogType.ERROR);
-            //    return;
-            //}
 
             await HandleRequest(request, () => new PATResponse { EFTPOSCommand = _eftposRepository.CreateEFTPOSCommand(patRequest.EFTPOSCommand) });
         }

@@ -55,7 +55,7 @@ namespace PayAtTable.TestPos
 
         public override string ToString()
         {
-            var header = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            var header = JsonConvert.SerializeObject(this);
             return header.Length.ToString("000000") + header;
         }
     }
@@ -68,7 +68,7 @@ namespace PayAtTable.TestPos
         public override string ToString()
         {
             Header.ContentLength = Content?.Length ?? 0;
-            var header = Newtonsoft.Json.JsonConvert.SerializeObject(Header);
+            var header = JsonConvert.SerializeObject(Header);
             return header.Length.ToString("000000") + header + Content;
         }
 
@@ -87,7 +87,7 @@ namespace PayAtTable.TestPos
             if (v.Length < (6 + headerLength))
                 return false;
             // Unpack header
-            Header = Newtonsoft.Json.JsonConvert.DeserializeObject<POSAPIMsgHeader>(v.Substring(6, headerLength));
+            Header = JsonConvert.DeserializeObject<POSAPIMsgHeader>(v.Substring(6, headerLength));
             // Validate content length
 
             if (v.Length < (6 + headerLength + Header.ContentLength))
