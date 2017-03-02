@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PayAtTable.TestPos.IPInterface
@@ -55,9 +54,17 @@ namespace PayAtTable.TestPos.IPInterface
         public ObservableCollection<LogData> Logs { get { return _logger.Logs; } }
         public LogData SelectedData { get { return _logger.SelectedData; } set { _logger.SelectedData = value; } }
 
+        public event EventHandler OnLogUpdate;
+
         public EftWrapper()
         {
             eft.OnLog += Eft_OnLog;
+            _logger.OnLogUpdate += _logger_OnLogUpdate;
+        }
+
+        private void _logger_OnLogUpdate(object sender, EventArgs e)
+        {
+            OnLogUpdate?.Invoke(this, EventArgs.Empty);
         }
 
         private void Eft_OnLog(object sender, LogEventArgs e)

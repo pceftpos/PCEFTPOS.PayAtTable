@@ -59,6 +59,8 @@ namespace PayAtTable.TestPos.IPInterface
 
         ObservableCollection<LogData> Logs { get; set; }
         LogData SelectedData { get; set; }
+
+        event EventHandler OnLogUpdate;
     }
 
     public class Logger : ILogger
@@ -67,17 +69,21 @@ namespace PayAtTable.TestPos.IPInterface
 
         public LogData SelectedData { get; set; } = null;
 
+        public event EventHandler OnLogUpdate;
+
         public void Log(string message, LogType type = LogType.INFO)
         {
             var msg = $"{DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt")}: [{type}] {message}";
             var x = new LogData(message, msg, type);
             Logs.Add(x);
+            OnLogUpdate?.Invoke(this, EventArgs.Empty);
         }
 
         public void Log(LogData data)
         {
             data.Data = $"{DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt")}: [{data.Type}] {data.Data}";
             Logs.Add(data);
+            OnLogUpdate?.Invoke(this, EventArgs.Empty);
         }
     }
 }

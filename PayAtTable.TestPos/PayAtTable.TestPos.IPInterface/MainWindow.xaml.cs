@@ -22,8 +22,14 @@ namespace PayAtTable.TestPos.IPInterface
     {
         public MainWindow()
         {
-            
             InitializeComponent();
+            myEftWrapper.OnLogUpdate += MyEftWrapper_OnLogUpdate;
+        }
+
+        private void MyEftWrapper_OnLogUpdate(object sender, EventArgs e)
+        {
+            lvLog.SelectedIndex = lvLog.Items.Count;
+            lvLog.ScrollIntoView(lvLog.SelectedItem);
         }
 
         private async void btnConnect_Click(object sender, RoutedEventArgs e)
