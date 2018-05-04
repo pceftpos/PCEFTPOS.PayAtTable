@@ -43,9 +43,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PCEFTPOS.API.IPInterface, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\PCEFTPOS.API.IPInterface\Release\PCEFTPOS.API.IPInterface.dll</HintPath>
+    <Reference Include="PCEFTPOS.API.IPInterface">
+      <HintPath>..\packages\PCEFTPOS.API.IPInterface.1.2.1\lib\net452\PCEFTPOS.API.IPInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
