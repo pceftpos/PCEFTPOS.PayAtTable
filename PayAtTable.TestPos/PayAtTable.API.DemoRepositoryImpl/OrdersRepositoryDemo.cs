@@ -49,6 +49,16 @@ namespace PayAtTable.Server.DemoRepository
             var lines = new List<string>();
             var t = SampleData.Current.Tables.Find(table => table.Id.Equals(o.TableId));
 
+            //id 99 is reserved for custom header/footer POS receipt
+            if (receiptOptionId == "99")
+            {
+                lines.Add("------------------------");
+                lines.Add("THIS IS A RECEIPT");
+                lines.Add("WITH POS DATA");
+                lines.Add("IN IT");
+                return new Receipt { Lines = lines };
+            }
+
             // Find the table for this order
             lines.Add("------------------------");
             lines.Add("-- Test Data --");

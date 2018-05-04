@@ -48,6 +48,17 @@ namespace PayAtTable.Server.DemoRepository
             var t = SampleData.Current.Tables.Find(table => table.Id.Equals(o.TableId));
 
             var lines = new List<string>();
+
+            //id 99 is reserved for custom header/footer POS receipt
+            if (receiptOptionId == "99")
+            {
+                lines.Add("------------------------");
+                lines.Add("THIS IS A RECEIPT");
+                lines.Add("WITH POS DATA");
+                lines.Add("IN IT");
+                return new Receipt { Lines = lines };
+            }
+
             lines.Add("------------------------");
             lines.Add(String.Format("{0, 24}", (t != null) ? t.DisplayName : "UNKNOWN"));
             lines.Add(String.Format("ORDER#{0, 18}", o.Id));

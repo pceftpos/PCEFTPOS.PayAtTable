@@ -10,7 +10,7 @@ using PayAtTable.API.Helpers;
 
 namespace PayAtTable.Server.DemoRepository
 {
-    public class SettingsRepositoryDemo: ISettingsRepository
+    public class SettingsRepositoryDemo : ISettingsRepository
     {
         protected static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -24,6 +24,7 @@ namespace PayAtTable.Server.DemoRepository
                 TenderType = TenderType.EFTPOS,
                 Merchant = "00",
                 DisplayName = "EFTPOS",
+
                 EnableSplitTender = false
             });
 
@@ -36,10 +37,28 @@ namespace PayAtTable.Server.DemoRepository
                 DisplayName = "Customer"
             });
 
+            //Create Header printer options
+            var printerOption = new PrinterOption()
+            {
+                PrintMode = PrinterMode.PCEFTPOS,
+                Location = Location.None,
+                StaticReceipt = new List<string>()
+                {
+                    "------------------------",
+                    "Some generic text",
+                    "that will print before",
+                    "every eftpos receipt",
+                    "if PrintMode = STATIC",
+                    "and location = header",
+                }
+            };
+
             return new Settings()
             {
                 TenderOptions = tenderOptions,
                 ReceiptOptions = receiptOptions,
+                PrinterOption = printerOption,
+
                 IsTippingEnabled = false,
                 CsdReservedString2 = "EFTPOS",
                 TxnType = "P"

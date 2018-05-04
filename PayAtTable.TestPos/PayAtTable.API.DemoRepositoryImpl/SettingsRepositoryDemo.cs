@@ -23,7 +23,10 @@ namespace PayAtTable.Server.DemoRepository
                 TenderType = TenderType.EFTPOS,
                 Merchant = "00",
                 DisplayName = "EFTPOS",
-                EnableSplitTender = true
+                EnableSplitTender = true,
+                TxnType = options.TxnType,
+                CsdReservedString2 = options.CsdReservedString2,
+                EnableTipping = options.IsTippingEnabled
             });
 
             if (options.IsMultipleTenderTypes)
@@ -34,7 +37,10 @@ namespace PayAtTable.Server.DemoRepository
                     TenderType = TenderType.EFTPOS,
                     Merchant = "03",
                     DisplayName = "GiftCard",
-                    EnableSplitTender = false
+                    EnableSplitTender = false,
+                    TxnType = options.TxnType,
+                    CsdReservedString2 = options.CsdReservedString2,
+                    EnableTipping = options.IsTippingEnabled
                 });
                 tenderOptions.Add(new TenderOption()
                 {
@@ -42,11 +48,14 @@ namespace PayAtTable.Server.DemoRepository
                     TenderType = TenderType.EFTPOS,
                     Merchant = "06",
                     DisplayName = "Amex",
-                    EnableSplitTender = false
+                    EnableSplitTender = false,
+                    TxnType = options.TxnType,
+                    CsdReservedString2 = options.CsdReservedString2,
+                    EnableTipping = options.IsTippingEnabled
                 });
             }
 
-            //Create receipt options and add a default value
+            // Create receipt options and add a default value
             var receiptOptions = new List<ReceiptOption>();
             receiptOptions.Add(new ReceiptOption()
             {
@@ -65,13 +74,27 @@ namespace PayAtTable.Server.DemoRepository
                 });
             }
 
+            //Create Header printer options
+            var printerOption = new PrinterOption()
+            {
+                PrintMode = PrinterMode.POS,
+                Location = Location.Header,
+                StaticReceipt = new List<string>()
+                {
+                    "------------------------",
+                    "Some generic text",
+                    "that will print before",
+                    "every eftpos receipt",
+                    "if PrintMode = STATIC",
+                    "and location = header",
+                }
+            };
+
             return new Settings()
             {
                 TenderOptions = tenderOptions,
                 ReceiptOptions = receiptOptions,
-                TxnType = options.TxnType,
-                CsdReservedString2 = options.CsdReservedString2,
-                IsTippingEnabled = options.IsTippingEnabled
+                PrinterOption = printerOption
             };
         }
     }

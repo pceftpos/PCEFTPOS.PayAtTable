@@ -227,7 +227,7 @@ namespace PayAtTable.Server.IntegrationTest
 
         public void Run()
         {
-            PATResponse r = null;
+            //PATResponse r = null;
             List<Table> tables = null;
             Order order = null;
             Table table = null;

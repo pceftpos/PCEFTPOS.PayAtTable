@@ -48,9 +48,9 @@ namespace PayAtTable.Server.DemoRepository
             Tables.Add(new Table() { Id = "57", DisplayNumber = 13, DisplayName = "TABLE 13" });
             Tables.Add(new Table() { Id = "58", DisplayNumber = 14, DisplayName = "TABLE 14" });
             //adding 3 orders to process table 1
-            Orders.Add(new Order() { Id = "101", TableId = "50", AmountOwing = 100.00M, DisplayName = "Stars" });
-            Orders.Add(new Order() { Id = "109", TableId = "50", AmountOwing = 1.00M, DisplayName = "Are" });
-            Orders.Add(new Order() { Id = "110", TableId = "50", AmountOwing = 2.00M, DisplayName = "Bright" });
+            Orders.Add(new Order() { Id = "101", TableId = "50", AmountOwing = 100.00M, DisplayName = "Sven" });
+            Orders.Add(new Order() { Id = "109", TableId = "50", AmountOwing = 1.00M, DisplayName = "Duke" });
+            Orders.Add(new Order() { Id = "110", TableId = "50", AmountOwing = 2.00M, DisplayName = "Elsa" });
 
             Orders.Add(new Order() { Id = "102", TableId = "51", AmountOwing = 1.00M, DisplayName = "Anna" });
             Orders.Add(new Order() { Id = "103", TableId = "52", AmountOwing = 350.00M, DisplayName = "Olaf" });

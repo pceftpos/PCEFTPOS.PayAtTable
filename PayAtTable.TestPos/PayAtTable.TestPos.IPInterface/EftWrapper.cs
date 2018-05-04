@@ -40,7 +40,7 @@ namespace PayAtTable.TestPos.IPInterface
 
     public class EftWrapper 
     {
-        IClientIPAsync eft = new EFTClientIPAsync();
+        IEFTClientIPAsync eft = new EFTClientIPAsync();
         ILogger _logger = new Logger();
 
         ITablesRepository _tablesRepository = new TablesRepositoryDemo();
