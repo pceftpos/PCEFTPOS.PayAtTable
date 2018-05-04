@@ -98,7 +98,7 @@ namespace PayAtTable.TestPos.IPInterface
             return true;
         }
 
-        public bool ParseFromString(PCEFTPOS.API.IPInterface.EFTPayAtTableResponse response)
+        public bool ParseFromString(PCEFTPOS.EFTClient.IPInterface.EFTPayAtTableResponse response)
         {
             Header = JsonConvert.DeserializeObject<POSAPIMsgHeader>(response.Header);
             Content = response.Content;

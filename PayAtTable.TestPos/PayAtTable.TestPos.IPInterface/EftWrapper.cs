@@ -2,7 +2,7 @@
 using PayAtTable.Server.Data;
 using PayAtTable.Server.DemoRepository;
 using PayAtTable.Server.Models;
-using PCEFTPOS.API.IPInterface;
+using PCEFTPOS.EFTClient.IPInterface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
