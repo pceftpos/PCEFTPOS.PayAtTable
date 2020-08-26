@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{40664F4F-6845-46C7-A68C-B8F78AD5DA89}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,16 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{40664F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.Shared", "PayAtTable.API.Shared\PayAtTable.Shared.csproj", "{115D3EAA-369F-4C11-B10B-A29ABA84D912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.API.Models", "PayAtTable.API.Models\PayAtTable.API.Models.csproj", "{1332295C-F939-4CB4-AB2A-44EBC6B09B74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.Server.IntegrationTest", "PayAtTable.API.IntegrationTest\PayAtTable.Server.IntegrationTest.csproj", "{E88BB951-C687-4A45-AE01-8BDCD65A6C9F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74} = {1332295C-F939-4CB4-AB2A-44EBC6B09B74}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.Server.DemoRepository", "PayAtTable.API.DemoRepositoryImpl\PayAtTable.Server.DemoRepository.csproj", "{1E97E03E-97C4-4D0A-94AE-9C41190C646A}"
 	ProjectSection(ProjectDependencies) = postProject
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74} = {1332295C-F939-4CB4-AB2A-44EBC6B09B74}
 		{115D3EAA-369F-4C11-B10B-A29ABA84D912} = {115D3EAA-369F-4C11-B10B-A29ABA84D912}
 	EndProjectSection
 EndProject
@@ -33,28 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{4EBA1CF8-D
 		docs\Pay at Table API.pdf = docs\Pay at Table API.pdf
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayAtTable.API.Models", "PayAtTable.API.Models\PayAtTable.API.Models.csproj", "{CCABA274-6A21-491A-963C-343EA27DFD57}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://pceftpos.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = PayAtTable.API.DemoRepositoryImpl\\PayAtTable.Server.DemoRepository.csproj
-		SccProjectName1 = PayAtTable.API.DemoRepositoryImpl
-		SccLocalPath1 = PayAtTable.API.DemoRepositoryImpl
-		SccProjectUniqueName2 = PayAtTable.API.IntegrationTest\\PayAtTable.Server.IntegrationTest.csproj
-		SccProjectName2 = PayAtTable.API.IntegrationTest
-		SccLocalPath2 = PayAtTable.API.IntegrationTest
-		SccProjectUniqueName3 = PayAtTable.API.Models\\PayAtTable.API.Models.csproj
-		SccProjectName3 = PayAtTable.API.Models
-		SccLocalPath3 = PayAtTable.API.Models
-		SccProjectUniqueName4 = PayAtTable.API.Shared\\PayAtTable.Shared.csproj
-		SccProjectName4 = PayAtTable.API.Shared
-		SccLocalPath4 = PayAtTable.API.Shared
-		SccProjectUniqueName5 = PayAtTable.Server\\PayAtTable.Server.csproj
-		SccProjectName5 = PayAtTable.Server
-		SccLocalPath5 = PayAtTable.Server
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -64,10 +39,6 @@ Global
 		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{115D3EAA-369F-4C11-B10B-A29ABA84D912}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1332295C-F939-4CB4-AB2A-44EBC6B09B74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E88BB951-C687-4A45-AE01-8BDCD65A6C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E88BB951-C687-4A45-AE01-8BDCD65A6C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E88BB951-C687-4A45-AE01-8BDCD65A6C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,8 +51,36 @@ Global
 		{364A2B05-AA84-43A7-B25E-DFE86FDE976D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364A2B05-AA84-43A7-B25E-DFE86FDE976D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364A2B05-AA84-43A7-B25E-DFE86FDE976D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCABA274-6A21-491A-963C-343EA27DFD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCABA274-6A21-491A-963C-343EA27DFD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCABA274-6A21-491A-963C-343EA27DFD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCABA274-6A21-491A-963C-343EA27DFD57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14C1DD65-8694-498F-8973-085839190C92}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://pceftpos.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PayAtTable.API.DemoRepositoryImpl\\PayAtTable.Server.DemoRepository.csproj
+		SccProjectName1 = PayAtTable.API.DemoRepositoryImpl
+		SccLocalPath1 = PayAtTable.API.DemoRepositoryImpl
+		SccProjectUniqueName2 = PayAtTable.API.IntegrationTest\\PayAtTable.Server.IntegrationTest.csproj
+		SccProjectName2 = PayAtTable.API.IntegrationTest
+		SccLocalPath2 = PayAtTable.API.IntegrationTest
+		SccProjectUniqueName3 = PayAtTable.API.Shared\\PayAtTable.Shared.csproj
+		SccProjectName3 = PayAtTable.API.Shared
+		SccLocalPath3 = PayAtTable.API.Shared
+		SccProjectUniqueName4 = PayAtTable.Server\\PayAtTable.Server.csproj
+		SccProjectName4 = PayAtTable.Server
+		SccLocalPath4 = PayAtTable.Server
+		SccProjectUniqueName5 = PayAtTable.API.Models\\PayAtTable.API.Models.csproj
+		SccProjectName5 = PayAtTable.API.Models
+		SccLocalPath5 = PayAtTable.API.Models
 	EndGlobalSection
 EndGlobal

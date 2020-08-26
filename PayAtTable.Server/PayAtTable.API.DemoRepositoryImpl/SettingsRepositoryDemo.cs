@@ -24,10 +24,33 @@ namespace PayAtTable.Server.DemoRepository
                 TenderType = TenderType.EFTPOS,
                 Merchant = "00",
                 DisplayName = "EFTPOS",
-
-                EnableSplitTender = false
+                EnableAmountEntry = false,
+                EnableSplitTender = true
             });
-
+            tenderOptions.Add(new TenderOption()
+            {
+                Id = "GC",
+                TenderType = TenderType.EFTPOS,
+                Merchant = "03",
+                DisplayName = "GiftCard",
+                EnableAmountEntry = true,
+                EnableSplitTender = true,
+                //TxnType = options.TxnType,
+                //CsdReservedString2 = options.CsdReservedString2,
+                //EnableTipping = options.IsTippingEnabled
+            });
+            tenderOptions.Add(new TenderOption()
+            {
+                Id = "AMEX",
+                TenderType = TenderType.EFTPOS,
+                Merchant = "06",
+                DisplayName = "Amex",
+                EnableAmountEntry = true,
+                EnableSplitTender = false,
+                //TxnType = options.TxnType,
+                //CsdReservedString2 = options.CsdReservedString2,
+                //EnableTipping = options.IsTippingEnabled
+            });
             // Create receipt options and add a default value
             var receiptOptions = new List<ReceiptOption>();
             receiptOptions.Add(new ReceiptOption()
@@ -35,6 +58,12 @@ namespace PayAtTable.Server.DemoRepository
                 Id = string.Empty,
                 ReceiptType = ReceiptType.Order,
                 DisplayName = "Customer"
+            });
+            receiptOptions.Add(new ReceiptOption()
+            {
+                Id = "1",
+                ReceiptType = ReceiptType.Order,
+                DisplayName = "Extended"
             });
 
             //Create Header printer options
@@ -59,7 +88,7 @@ namespace PayAtTable.Server.DemoRepository
                 ReceiptOptions = receiptOptions,
                 PrinterOption = printerOption,
 
-                IsTippingEnabled = false,
+                IsTippingEnabled = true,
                 CsdReservedString2 = "EFTPOS",
                 TxnType = "P"
             };

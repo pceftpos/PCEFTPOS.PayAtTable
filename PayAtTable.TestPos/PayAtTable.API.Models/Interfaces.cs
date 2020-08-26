@@ -36,10 +36,13 @@ namespace PayAtTable.Server.Data
 
     public class SettingsOptions
     {
-        public bool IsMultipleTenderTypes { get; set; } = false;
+        public List<TenderOption> TenderTypes { get; set; } = new List<TenderOption>();
+        public bool IsMultipleTenderTypes { get; set; } = true;
         public bool IsMultiplePrintOptions { get; set; } = false;
 
         public bool IsTippingEnabled { get; set; } = false;
+
+        public Location CustomReceiptLocation { get; set; } = Location.None;
 
         public string TxnType { get; set; } = "P";
         public string CsdReservedString2 { get; set; } = "EFTPOS";

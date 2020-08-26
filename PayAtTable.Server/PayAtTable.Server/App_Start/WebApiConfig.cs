@@ -8,6 +8,7 @@ using PayAtTable.Server.Data;
 using PayAtTable.Server.Models;
 using PayAtTable.API.Helpers;
 using System.Reflection;
+using PayAtTable.Server.Helpers;
 
 namespace PayAtTable.Server
 {
@@ -54,6 +55,7 @@ namespace PayAtTable.Server
                 //container.Register<IEFTPOSRepository, DemoRepository>().AsPerRequestSingleton();
                 //container.Register<ITendersRepository, DemoRepository>().AsPerRequestSingleton();
                 //container.Register<ISettingsRepository, DemoRepository>().AsPerRequestSingleton();            
+                container.Register<IClientValidator, ClientValidator>().AsPerRequestSingleton();            
 
                 // Set Web API dependancy resolver
                 System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new TinyIocWebApiDependencyResolver(container);
@@ -66,6 +68,9 @@ namespace PayAtTable.Server
 
                 // Web API2 routes
                 config.MapHttpAttributeRoutes();
+#if SSL
+                config.Filters.Add(new RequireHttpsAttribute());
+#endif
 
                 // Uncomment the following code to support WEB API v1 routing
                 //config.Routes.MapHttpRoute(

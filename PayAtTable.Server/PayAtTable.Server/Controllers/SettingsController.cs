@@ -8,7 +8,8 @@ using Common.Logging;
 using PayAtTable.Server.Data;
 using PayAtTable.Server.Models;
 using PayAtTable.API.Helpers;
-
+using System.Web;
+using PayAtTable.Server.Helpers;
 
 namespace PayAtTable.Server.Controllers
 {
@@ -17,16 +18,21 @@ namespace PayAtTable.Server.Controllers
     {
         protected static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
         protected readonly ISettingsRepository _settingsRepository;
+        protected readonly IClientValidator _clientValidator;
 
-        public SettingsController(ISettingsRepository settingsRepository)
+        public SettingsController(ISettingsRepository settingsRepository, IClientValidator certificateValidator)
         {
             log.DebugEx("SettingsController created");
             _settingsRepository = settingsRepository;
+            _clientValidator = certificateValidator;
         }
 
         [HttpGet, Route("settings")]
         public HttpResponseMessage GetSettings()
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx("GET ~/api/settings");
 
             try

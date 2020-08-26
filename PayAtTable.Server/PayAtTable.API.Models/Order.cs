@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PayAtTable.Server.Models
+﻿namespace PayAtTable.Server.Models
 {
     public enum OrderState { Pending = 0, Active = 10, Tendering = 20, Complete = 30 }
 

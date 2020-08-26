@@ -30,6 +30,12 @@ namespace PayAtTable.Server.Models
         /// True if the user should be able to tender for an amount less than the total of the order
         /// </summary>
         public bool EnableSplitTender { get; set; }
+
+        /// <summary>
+        /// False to disable amount entry
+        /// </summary>
+        public bool EnableAmountEntry { get; set; }
+
     }
 
 

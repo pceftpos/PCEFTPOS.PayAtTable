@@ -46,7 +46,7 @@
                              HorizontalAlignment="Left"
                              VerticalContentAlignment="Center"/>
                 </WrapPanel>
-                <CheckBox x:Name="chkUseSsl" Content="Use PC-EFTPOS Cloud" HorizontalAlignment="Left" Margin="119, 5" IsChecked="{Binding Data.UseSSL, Mode=TwoWay}"/>
+                <CheckBox x:Name="chkUseSsl" Content="Use Cloud" HorizontalAlignment="Left" Margin="119, 5" IsChecked="{Binding Data.UseSSL, Mode=TwoWay}"/>
                 <GroupBox Header="Transaction settings">
                     <StackPanel>
                         <WrapPanel>
@@ -58,7 +58,6 @@
                         <WrapPanel Orientation="Horizontal">
                             <CheckBox Content="Multiple Tender Types" x:Name="chkTenderTypes" Margin="5" IsChecked="{Binding Data.Options.IsMultipleTenderTypes, Mode=TwoWay}"/>
                             <CheckBox Content="Multiple Print Options" x:Name="chkPrintOptions" Margin="5" IsChecked="{Binding Data.Options.IsMultiplePrintOptions, Mode=TwoWay}"/>
-                            <CheckBox Content="Allow Tipping" x:Name="chkTipping" Margin="5" IsChecked="{Binding Data.Options.IsTippingEnabled, Mode=TwoWay}"/>
                         </WrapPanel>
                     </StackPanel>
                 </GroupBox>

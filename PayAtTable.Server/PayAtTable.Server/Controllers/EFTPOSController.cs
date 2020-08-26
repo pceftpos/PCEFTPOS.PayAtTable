@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using PayAtTable.Server.Data;
 using PayAtTable.Server.Models;
 using PayAtTable.API.Helpers;
-
+using PayAtTable.Server.Helpers;
 
 namespace PayAtTable.Server.Controllers
 {
@@ -19,16 +19,21 @@ namespace PayAtTable.Server.Controllers
     {
         protected static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
         protected readonly IEFTPOSRepository _eftposRepository;
+        protected readonly IClientValidator _clientValidator;
 
-        public EFTPOSController(IEFTPOSRepository eftposRepository)
+        public EFTPOSController(IEFTPOSRepository eftposRepository, IClientValidator certificateValidator)
         {
             log.DebugEx("EFTPOSController created");
             _eftposRepository = eftposRepository;
+            _clientValidator = certificateValidator;
         }
 
         [HttpPost, Route("eftpos/commands")]
         public HttpResponseMessage CreateEFTPOSCommand([FromBody]PATRequest commandRequest)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx(tr => tr.Set("POST ~/api/eftpos/commands", commandRequest));
 
             // Extract the eftpos command from the request

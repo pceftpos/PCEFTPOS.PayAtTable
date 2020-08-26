@@ -21,5 +21,10 @@ namespace PayAtTable.Server.Models
         /// A number for the user to select this order lookup e.g. 42
         /// </summary>
         public int DisplayNumber { get; set; }
+
+        /// <summary>
+        /// A string that represents either the servers name or employee ID. Max 8 characters. 
+        /// </summary>
+        public string ServerName { get; set; }
     }
 }

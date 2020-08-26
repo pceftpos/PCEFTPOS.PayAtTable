@@ -132,6 +132,6 @@ namespace PayAtTable.Server.Models
         [System.Obsolete("Use TxnType in each TenderOption", true)]
         public string TxnType { get; set; }
         [System.Obsolete("Use EnableTipping in each TenderOption", true)]
-        public bool IsTippingEnabled { get; set; }
+        public bool? IsTippingEnabled { get; set; } = null;
     }
 }

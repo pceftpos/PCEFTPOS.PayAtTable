@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PayAtTable.Server.IntegrationTest</RootNamespace>
     <AssemblyName>PayAtTable.Server.IntegrationTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -17,6 +17,7 @@
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PayAtTable.API.Models\PayAtTable.API.Models.csproj">
-      <Project>{1332295c-f939-4cb4-ab2a-44ebc6b09b74}</Project>
+      <Project>{ccaba274-6a21-491a-963c-343ea27dfd57}</Project>
       <Name>PayAtTable.API.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\PayAtTable.API.Shared\PayAtTable.Shared.csproj">

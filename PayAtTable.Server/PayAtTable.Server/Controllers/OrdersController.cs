@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using PayAtTable.Server.Data;
 using PayAtTable.Server.Models;
 using PayAtTable.API.Helpers;
-
+using PayAtTable.Server.Helpers;
 
 namespace PayAtTable.Server.Controllers
 {
@@ -18,16 +18,21 @@ namespace PayAtTable.Server.Controllers
     {
         protected static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
         protected readonly IOrdersRepository _ordersRepository;
+        protected readonly IClientValidator _clientValidator;
 
-        public OrdersController(IOrdersRepository ordersRepository)
+        public OrdersController(IOrdersRepository ordersRepository, IClientValidator certificateValidator)
         {
             log.DebugEx("OrdersController created");
             _ordersRepository = ordersRepository;
+            _clientValidator = certificateValidator;
         }
 
         [HttpGet, Route("tables/{id}/orders")]
         public HttpResponseMessage GetOrdersByTableId(string id)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx(tr => tr.Set(String.Format("GET ~/api/tables/{0}/orders", id)));
             try
             {
@@ -50,6 +55,9 @@ namespace PayAtTable.Server.Controllers
         [HttpGet, Route("orders/{id}")]
         public HttpResponseMessage GetOrder(string id)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx(tr => tr.Set(String.Format("GET ~/api/orders/{0}", id)));
             try
             {
@@ -72,6 +80,9 @@ namespace PayAtTable.Server.Controllers
         [HttpGet, Route("orders/{id}/receipt")]
         public HttpResponseMessage GetOrderCustomerReceipt(string id, string receiptOptionId = null)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             var option = (!string.IsNullOrEmpty(receiptOptionId) ? receiptOptionId : string.Empty);
             log.DebugEx(tr => tr.Set(String.Format("GET ~/api/orders/{0}/receipt?receiptOptionId={1}", id, option)));
 

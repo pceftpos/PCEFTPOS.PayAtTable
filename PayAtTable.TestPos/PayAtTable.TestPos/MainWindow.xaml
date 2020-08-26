@@ -7,26 +7,17 @@
         xmlns:local="clr-namespace:PayAtTable.TestPos"
         xmlns:vm="clr-namespace:PayAtTable.TestPos.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="625" Loaded="Window_Loaded">
+        Title="Linkly Pay @ Table Demo" Height="550" Width="650" Loaded="Window_Loaded" Closed="Window_Closed"
+        MinHeight="600" MinWidth="650" WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <vm:ApiDataViewModel x:Name="myApiDataViewModel" />
     </Window.DataContext>
-    <Grid x:Name="grid1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Expander Header="Settings" Grid.Row="0" Grid.ColumnSpan="3">
+    <DockPanel Margin="5" LastChildFill="True">
+        <Expander x:Name="exSettings"
+                  Header="Settings" 
+                  DockPanel.Dock="Top"
+                  Collapsed="exSettings_Collapsed"
+                  Expanded="exSettings_Expanded">
             <StackPanel>
                 <WrapPanel>
                     <Label Content="TxnType" Margin="5"/>
@@ -34,29 +25,148 @@
                     <Label Content="CsdReservedString2" Margin="5"/>
                     <TextBox x:Name="txtCsdReservedString2" Text="{Binding Options.CsdReservedString2, Mode=TwoWay}" Width="150" Margin="5" VerticalContentAlignment="Center"/>
                 </WrapPanel>
+                <WrapPanel>
+                    <RadioButton Content="Empty Table list" x:Name="chkEmptyTableList" Margin="5"/>
+                    <RadioButton Content="3 Table list" x:Name="chk3TableList" Margin="5"/>
+                    <RadioButton Content="5 Table list" x:Name="chkLess6TableList" Margin="5"/>
+                    <RadioButton Content="more than 6 Table list" x:Name="chkMores6TableList" Margin="5" IsChecked="True"/>
+                </WrapPanel>
                 <WrapPanel Orientation="Horizontal">
-                    <CheckBox Content="Multiple Tender Types" x:Name="chkTenderTypes" Margin="5" IsChecked="{Binding Options.IsMultipleTenderTypes, Mode=TwoWay}"/>
-                    <CheckBox Content="Multiple Print Options" x:Name="chkPrintOptions" Margin="5" IsChecked="{Binding Options.IsMultiplePrintOptions, Mode=TwoWay}"/>
-                    <CheckBox Content="Allow Tipping" x:Name="chkTipping" Margin="5" IsChecked="{Binding Options.IsTippingEnabled, Mode=TwoWay}"/>
+                    <RadioButton Content="No Print Options" x:Name="rdEmptyPrintOptions" Margin="5" Checked="ChkEmptyPrintOptions_Checked" Unchecked="ChkEmptyPrintOptions_Checked"/>
+                    <RadioButton Content="Single Print Option" x:Name="rdSinglePrintOptions" Margin="5" Checked="ChkEmptyPrintOptions_Checked" Unchecked="ChkEmptyPrintOptions_Checked"/>
+                    <RadioButton Content="Multiple Print Options" x:Name="rdMultiplePrintOptions" Margin="5" Checked="ChkEmptyPrintOptions_Checked" Unchecked="ChkEmptyPrintOptions_Checked"/>
+                </WrapPanel>
+                <WrapPanel Orientation="Horizontal">
+                    <RadioButton Content="Custom Receipt Header" x:Name="rdPrintHeader" Margin="5" Checked="CustomPrinterChanged" Unchecked="CustomPrinterChanged"/>
+                    <RadioButton Content="Custom Receipt Footer" x:Name="rdPrintFooter" Margin="5" Checked="CustomPrinterChanged" Unchecked="CustomPrinterChanged"/>
+                    <RadioButton Content="No Custom Receipt" x:Name="rdPrintNone" Margin="5" Checked="CustomPrinterChanged" Unchecked="CustomPrinterChanged"/>
                 </WrapPanel>
             </StackPanel>
         </Expander>
+        <Grid HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch"
+              DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="197*"/>
+                <ColumnDefinition Width="210*"/>
+                <ColumnDefinition Width="211*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnStatus" 
+                    Content="Pinpad Status" 
+                    Click="btnStatus_Click" 
+                    Height="40" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Button x:Name="btnSendSettings" 
+                    Content="Force send settings" 
+                    Click="btnSendSettings_Click" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    Grid.Column="3"/>
+            <Button x:Name="btnClear" 
+                    Content="Clear Logs" 
+                    Click="btnClear_Click" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    Grid.Column="4"/>
+        </Grid>
+        <ListView x:Name="TableList"
+                  ItemsSource="{Binding TableList, Mode=OneWay}"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  SelectedIndex="{Binding CurrentTableIndex}"
+                  DockPanel.Dock="Top">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
+                               RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                               ItemWidth="{Binding (ListView.View).ItemWidth, 
+                               RelativeSource={RelativeSource AncestorType=ListView}}"
+                               MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                               ItemHeight="{Binding (ListView.View).ItemHeight, 
+                               RelativeSource={RelativeSource AncestorType=ListView}}" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="Background" Value="LightSteelBlue"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="100">
+                        <TextBlock x:Name="TableName" 
+                                   Text="{Binding TableName}"
+                                   Margin="10"
+                                   FontSize="20"
+                                   FontWeight="Medium"/>
+                        <ItemsControl x:Name="OrderList"
+                                      ItemsSource="{Binding OrderList}"
+                                      Margin="30,0,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                               >
+                                        <DockPanel.Style>
+                                            <Style TargetType="DockPanel">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding OrderProcessing}" Value="True">
+                                                        <Setter Property="Background" Value="LightSalmon"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DockPanel.Style>
+                                        <TextBlock x:Name="OrderItem" 
+                                                   Text="{Binding OrderName}"
+                                                   Margin="10,0"
+                                                   Width="100"/>
+                                        <TextBlock x:Name="OrderCost" 
+                                                   Text="{Binding OrderCost}"
+                                                   Margin="10,0"
+                                                   Width="100"
+                                                   TextAlignment="Right"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-        <Button x:Name="btnStatus" Grid.Row="1" Grid.Column="0" Content="Pinpad Status" Click="btnStatus_Click" Height="40"/>
-        <Button x:Name="btnSendSettings" Grid.Row="1" Grid.Column="1" Content="Force send settings" Click="btnSendSettings_Click"/>
-        <Button x:Name="btnClear" Grid.Row="1" Grid.Column="2" Content="Clear Logs" Click="btnClear_Click" />
-        <!--<TextBox x:Name="txtLog" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>-->
+        <Expander x:Name="exLogs"
+                  Header="Logs" 
+                  DockPanel.Dock="Top"
+                  Collapsed="exLogs_Collapsed"
+                  Expanded="exLogs_Expanded">
+            <StackPanel>
+                <!--<TextBox x:Name="txtTIndex" />
+                <TextBox x:Name="txtIndex" />
+                <Button x:Name="btnTest" Content="test status" Click="btnTest_Click"/>
+                <Button x:Name="btnTestAmt" Content="test amt" Click="btnTestAmt_Click"/>
+                <Button x:Name="btnTestAmtPaid" Content="test paid" Click="btnTestAmtPaid_Click"/>-->
+                <ListView x:Name="lvLog" 
+                          ItemsSource="{Binding Logs, Mode=OneWay}" 
+                          DisplayMemberPath="Data" 
+                          SelectedValue="{Binding SelectedData, Mode=TwoWay}" 
+                          Height="150"/>
+                <TextBlock Text="Details" Height="15"/>
+                <TextBox x:Name="txtRawData" 
+                         Text="{Binding SelectedData.RawData, Mode=OneWay}" 
+                         Height="150"
+                         MinHeight="100"
+                         TextWrapping="Wrap" 
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+        </Expander>
 
-        <ListView x:Name="lvLog" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding Logs, Mode=OneWay}" DisplayMemberPath="Data" SelectedValue="{Binding SelectedData, Mode=TwoWay}"/>
-
-        <TextBlock Text="Details" Grid.Row="3"  Grid.ColumnSpan="3"/>
-        <TextBox x:Name="txtRawData" 
-                 Text="{Binding SelectedData.RawData, Mode=OneWay}" 
-                 Grid.Row="4" Grid.ColumnSpan="3" 
-                 TextWrapping="Wrap" 
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         <WindowsFormsHost Name="wfh" Visibility="Hidden">
             <csdeft:AxCsdEft x:Name="eft" StatusEvent="eft_StatusEvent" CsdReserved3="eft_CsdReserved3"/>
         </WindowsFormsHost>
-    </Grid>
+    </DockPanel>
 </Window>

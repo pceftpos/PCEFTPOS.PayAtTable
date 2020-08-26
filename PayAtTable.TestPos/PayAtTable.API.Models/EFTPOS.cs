@@ -90,7 +90,7 @@ namespace PayAtTable.Server.Models
         /// </summary>
         public DateTime InsertionDateTime { get; set; }
 
-        // Fields from PC-EFTPOS
+        // Fields from Linkly
         public string AccountType { get; set; }
         public decimal AmtCash { get; set; }
         public decimal AmtPurchase { get; set; }

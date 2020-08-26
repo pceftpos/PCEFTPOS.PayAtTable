@@ -1,0 +1,75 @@
+{
+  "TenderTypes": [
+    {
+      "Id": "EFTPOS",
+      "TenderType": 0,
+      "Merchant": "00",
+      "DisplayName": "EFTPOS",
+      "EnableSplitTender": true,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    },
+    {
+      "Id": "GC",
+      "TenderType": 0,
+      "Merchant": "00",
+      "DisplayName": "GiftCard",
+      "EnableSplitTender": false,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    },
+    {
+      "Id": "FULLAMT",
+      "TenderType": 0,
+      "Merchant": "00",
+      "DisplayName": "FULL PAYMENT",
+      "EnableSplitTender": false,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    },
+    {
+      "Id": "ZipMoney",
+      "TenderType": 0,
+      "Merchant": "89",
+      "DisplayName": "ZipMoney",
+      "EnableSplitTender": true,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    },
+    {
+      "Id": "Alipay",
+      "TenderType": 0,
+      "Merchant": "66",
+      "DisplayName": "Alipay",
+      "EnableSplitTender": true,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    },
+    {
+      "Id": "AfterPay",
+      "TenderType": 0,
+      "Merchant": "65",
+      "DisplayName": "AfterPay",
+      "EnableSplitTender": true,
+      "EnableTipping": true,
+      "CsdReservedString2": "EFTPOS",
+      "TxnType": "P",
+      "PurchaseAnalysisData": null
+    }
+  ],
+  "IsMultiplePrintOptions": true,
+  "IsTippingEnabled": true,
+  "CustomReceiptLocation": 0,
+  "TxnType": "P",
+  "CsdReservedString2": "EFTPOS"
+}

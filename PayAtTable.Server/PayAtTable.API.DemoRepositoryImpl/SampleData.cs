@@ -48,14 +48,18 @@ namespace PayAtTable.Server.DemoRepository
             Tables.Add(new Table() { Id = "57", DisplayNumber = 13, DisplayName = "TABLE 13" });
             Tables.Add(new Table() { Id = "58", DisplayNumber = 14, DisplayName = "TABLE 14" });
 
-            Orders.Add(new Order() { Id = "101", TableId = "50", AmountOwing = 100.00M, DisplayName = "Elsa" });
-            Orders.Add(new Order() { Id = "102", TableId = "51", AmountOwing = 1.00M, DisplayName = "Anna" });
+            Orders.Add(new Order() { Id = "101", TableId = "50", AmountOwing = 108.00M, DisplayName = "Elsa" });
+            Orders.Add(new Order() { Id = "102", TableId = "51", AmountOwing = 1.08M, DisplayName = "Signature" }); // signature
             Orders.Add(new Order() { Id = "103", TableId = "52", AmountOwing = 350.00M, DisplayName = "Olaf" });
             Orders.Add(new Order() { Id = "104", TableId = "53", AmountOwing = 20.00M, DisplayName = "Kristoff" });
             Orders.Add(new Order() { Id = "105", TableId = "55", AmountOwing = 15.00M, DisplayName = "Hans" });
             Orders.Add(new Order() { Id = "106", TableId = "56", AmountOwing = 96.00M, DisplayName = "Duke" });
-            Orders.Add(new Order() { Id = "107", TableId = "57", AmountOwing = 52.00M, DisplayName = "Oaken" });
+            Orders.Add(new Order() { Id = "107", TableId = "57", AmountOwing = 520.00M, DisplayName = "Oaken" });
             Orders.Add(new Order() { Id = "108", TableId = "58", AmountOwing = 756.00M, DisplayName = "Gerda" });
+            Orders.Add(new Order() { Id = "109", TableId = "50", AmountOwing = 60.00M, DisplayName = "N. Scamander" });
+            Orders.Add(new Order() { Id = "110", TableId = "50", AmountOwing = 70.00M, DisplayName = "R. Weasley" });
+            Orders.Add(new Order() { Id = "111", TableId = "51", AmountOwing = 50.00M, DisplayName = "H. Potter" });
+            Orders.Add(new Order() { Id = "112", TableId = "52", AmountOwing = 55.00M, DisplayName = "H. Granger" });
         }
 
     }

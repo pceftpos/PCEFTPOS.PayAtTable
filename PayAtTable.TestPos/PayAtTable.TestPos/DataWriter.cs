@@ -12,10 +12,13 @@ namespace PayAtTable.TestPos
     {
         string GetPath(string filename)
         {
-            var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\PC-EFTPOS\\";
+            var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\Linkly\\";
             Directory.CreateDirectory(path);
 
             var fullPath = $"{path}PAT-{filename}";
+
+            if (!File.Exists(fullPath))
+                File.Copy($"PAT-{filename}", fullPath);
            
             return fullPath;
         }

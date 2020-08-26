@@ -1,7 +1,7 @@
-Copyright (c) 2016-2018 PC-EFTPOS Pty Ltd 
+Copyright (c) 2016-2020 Linkly
  
 All rights reserved. 
  
-PCEFTPOS.PayAtTable can not be modified and/or distributed without the express permission of PC-EFTPOS Pty Ltd.
+PCEFTPOS.PayAtTable can not be modified and/or distributed without the express permission of Linkly.
  
-Please contact PC-EFTPOS Pty Ltd for more information on licensing this solution. 
+Please contact Linkly for more information on licensing this solution. 

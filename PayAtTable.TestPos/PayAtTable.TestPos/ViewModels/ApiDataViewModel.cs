@@ -88,6 +88,7 @@ namespace PayAtTable.TestPos.ViewModels
     public class ApiDataViewModel : INotifyPropertyChanged
     {
         const string SETTINGS_FILENAME = "settings.json";
+        const string DATA_FILENAME = "data.json";
 
         public ObservableCollection<LogData> Logs { get; set; } = new ObservableCollection<LogData>();
 
@@ -112,7 +113,13 @@ namespace PayAtTable.TestPos.ViewModels
         public string CurrentTable { private get { return _currentTable; } set { _previousTable = _currentTable; _currentTable = value; GetTableIndex(); } }  
         string _currentOrder = string.Empty;
         string _previousOrder = string.Empty;
-        public string CurrentOrder { private get { return _currentOrder; } set { _previousOrder = _currentOrder; _currentOrder = value; _processingOrder = true; } }  
+        public string CurrentOrder { private get { return _currentOrder; } set { _previousOrder = _currentOrder; _currentOrder = value; _processingOrder = true; } }
+
+        /// <summary>
+        /// Enable this to test restoring of last transaction data
+        /// </summary>
+        public bool RestoreData { get; private set; } = false;
+
         private bool _processingOrder = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -123,6 +130,7 @@ namespace PayAtTable.TestPos.ViewModels
             TxnTypes.Add("R", "Refund");
 
             LoadSettings();
+            LoadData();
         }
 
         public void Log(string message, LogType type = LogType.INFO)
@@ -275,6 +283,44 @@ namespace PayAtTable.TestPos.ViewModels
                 settings.Save(Options, SETTINGS_FILENAME);
             }
             catch 
+            {
+            }
+        }
+
+        public void LoadData()
+        {
+            if (!RestoreData)
+                return;
+
+            try
+            {
+                var data = SampleData.Current;
+                data.Clear();
+
+                var w = new JsonWriter();
+                w.Load(DATA_FILENAME, out data);
+
+                if (data != default(SampleData))
+                {
+                    SampleData.Current.Set(data);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void SaveData()
+        {
+            if (!RestoreData)
+                return;
+
+            try
+            {
+                var data = new JsonWriter();
+                data.Save(SampleData.Current, DATA_FILENAME);
+            }
+            catch
             {
             }
         }

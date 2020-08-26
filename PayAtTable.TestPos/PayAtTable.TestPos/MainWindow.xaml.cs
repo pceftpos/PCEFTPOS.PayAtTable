@@ -43,6 +43,20 @@ namespace PayAtTable.TestPos
         public MainWindow()
         {
             InitializeComponent();
+
+            myApiDataViewModel.CreateTableList();
+
+            if (myApiDataViewModel.Options.CustomReceiptLocation == Location.Header)
+                rdPrintHeader.IsChecked = true;
+            else if (myApiDataViewModel.Options.CustomReceiptLocation == Location.Footer)
+                rdPrintFooter.IsChecked = true;
+            else
+                rdPrintNone.IsChecked = true;
+
+            if (myApiDataViewModel.Options.IsMultiplePrintOptions)
+                rdMultiplePrintOptions.IsChecked = true;
+            else
+                rdSinglePrintOptions.IsChecked = true;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -196,6 +210,8 @@ namespace PayAtTable.TestPos
             }
 
             HandleRequest(request, () => new PATResponse { Tender = tendersRepository.UpdateTender(patRequest.Tender) });
+            myApiDataViewModel.CurrentOrder = patRequest.Tender.OrderId;
+            myApiDataViewModel.UpdateTableData();
         }
 
         private void HandleCreateTender(POSAPIMsg request)
@@ -208,11 +224,14 @@ namespace PayAtTable.TestPos
             }
 
             HandleRequest(request, () => new PATResponse { Tender = tendersRepository.CreateTender(patRequest.Tender) });
+            myApiDataViewModel.CurrentOrder = patRequest.Tender.OrderId;
+            myApiDataViewModel.UpdateOrderStatus();
         }
 
         private void HandleGetTableOrders(POSAPIMsg request)
         {
             HandleRequest(request, () => new PATResponse() { Orders = ordersRepository.GetOrdersFromTable(request.Header.TableId) });
+            myApiDataViewModel.CurrentTable = request.Header.TableId;
         }
 
         //receipt info to print
@@ -225,16 +244,31 @@ namespace PayAtTable.TestPos
         private void HandleGetOrder(POSAPIMsg request)
         {
             HandleRequest(request, () => new PATResponse() { Order = ordersRepository.GetOrder(request.Header.OrderId) });
+            //myApiDataViewModel.CurrentOrder = request.Header.OrderId;
+            //myApiDataViewModel.UpdateOrderStatus();
         }
 
         private void HandleGetTables(POSAPIMsg request)
         {
-            HandleRequest(request, () => new PATResponse() { Tables = tablesRepository.GetTables() });
+            IEnumerable<Server.Models.Table> tables = new List<Server.Models.Table>();
+            if (!chkEmptyTableList.IsChecked.GetValueOrDefault())
+                tables = tablesRepository.GetTables();
+
+            if (chk3TableList.IsChecked.GetValueOrDefault())
+                tables = tables.Take(3);
+            else if (chkLess6TableList.IsChecked.GetValueOrDefault())
+                tables = tables.Take(5);
+
+            HandleRequest(request, () => new PATResponse() { Tables = tables });
         }
 
         private void HandleGetSettings(POSAPIMsg request)
         {
-            HandleRequest(request, () => new PATResponse() { Settings = settingsRepository.GetSettings(myApiDataViewModel.Options) });
+            var settings = settingsRepository.GetSettings(myApiDataViewModel.Options);
+            if (rdEmptyPrintOptions.IsChecked.GetValueOrDefault())
+                settings.ReceiptOptions.Clear();
+
+            HandleRequest(request, () => new PATResponse() { Settings = settings });
         }
 
         private void HandleGetTablesWithOrders(POSAPIMsg request)
@@ -269,5 +303,114 @@ namespace PayAtTable.TestPos
         {
             myApiDataViewModel.Logs.Clear();
         }
+
+        private void ResizeWindow()
+        {
+            if (exLogs == null || exSettings == null)
+                return;
+
+            if (exLogs.IsExpanded && exSettings.IsExpanded)
+            {
+                MinHeight = 950;
+            }
+            else if (exLogs.IsExpanded)
+            {
+                MinHeight = 910;
+            }
+            else if (exSettings.IsExpanded)
+            {
+                MinHeight = 660;
+            }
+            else
+            {
+                MinHeight = 600;
+            }
+
+            
+
+            Height = MinHeight;
+        }
+
+        private void exSettings_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ResizeWindow();
+        }
+
+        private void exLogs_Collapsed(object sender, RoutedEventArgs e)
+        {
+            ResizeWindow();
+        }
+
+        private void exLogs_Expanded(object sender, RoutedEventArgs e)
+        {
+            ResizeWindow();
+        }
+
+        private void exSettings_Expanded(object sender, RoutedEventArgs e)
+        {
+            ResizeWindow();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                //myApiDataViewModel.Settings.TippingEnabled = chkTipping.IsChecked.Value;
+                myApiDataViewModel.SaveSettings();
+                myApiDataViewModel.SaveData();
+            }
+            catch //(Exception ex)
+            {
+                //Trace.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void CustomPrinterChanged(object sender, RoutedEventArgs e)
+        {
+            myApiDataViewModel.Options.CustomReceiptLocation = 
+                rdPrintHeader.IsChecked.GetValueOrDefault() ? Location.Header 
+                : rdPrintFooter.IsChecked.GetValueOrDefault() ? Location.Footer 
+                : Location.None;
+        }
+
+        private void ChkEmptyPrintOptions_Checked(object sender, RoutedEventArgs e)
+        {
+            myApiDataViewModel.Options.IsMultiplePrintOptions = rdMultiplePrintOptions.IsChecked.GetValueOrDefault();
+        }
+
+
+        //private void btnTest_Click(object sender, RoutedEventArgs e)
+        //{
+        //    int index = Convert.ToInt32(txtIndex.Text);
+        //    int tIndex = Convert.ToInt32(txtTIndex.Text);
+        //    myApiDataViewModel.CurrentTable = SampleData.Current.Tables[tIndex].Id;
+        //    myApiDataViewModel.CurrentOrder = SampleData.Current.Orders[index].Id;
+        //    myApiDataViewModel.UpdateOrderStatus();
+        //}
+
+        //private void btnTestAmt_Click(object sender, RoutedEventArgs e)
+        //{
+        //    int index = Convert.ToInt32(txtIndex.Text);
+        //    int tIndex = Convert.ToInt32(txtTIndex.Text);
+        //    myApiDataViewModel.CurrentTable = SampleData.Current.Tables[tIndex].Id;
+        //    myApiDataViewModel.CurrentOrder = SampleData.Current.Orders[index].Id;
+        //    SampleData.Current.Orders[index].AmountOwing = 50;
+        //    myApiDataViewModel.UpdateTableData();
+        //}
+
+        //private void btnTestAmtPaid_Click(object sender, RoutedEventArgs e)
+        //{
+        //    int index = Convert.ToInt32(txtIndex.Text);
+        //    int tIndex = Convert.ToInt32(txtTIndex.Text);
+        //    myApiDataViewModel.CurrentTable = SampleData.Current.Tables[tIndex].Id;
+        //    myApiDataViewModel.CurrentOrder = SampleData.Current.Orders[index].Id;
+        //    SampleData.Current.Orders[index].AmountOwing = 0;
+        //    SampleData.Current.Orders[index].OrderState = OrderState.Complete;
+        //    myApiDataViewModel.UpdateTableData();
+        //}
     }
 }

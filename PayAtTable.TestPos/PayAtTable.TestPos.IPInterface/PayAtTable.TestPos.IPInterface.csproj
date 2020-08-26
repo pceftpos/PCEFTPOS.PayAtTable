@@ -39,12 +39,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PCEFTPOS.EFTClient.IPInterface, Version=1.4.0.0, Culture=neutral, PublicKeyToken=eb17aa65ec898c97, processorArchitecture=MSIL">
-      <HintPath>..\packages\PCEFTPOS.EFTClient.IPInterface.1.4.0\lib\net452\PCEFTPOS.EFTClient.IPInterface.dll</HintPath>
+    <Reference Include="PCEFTPOS.API.IPInterface, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCEFTPOS.API.IPInterface.1.2.1\lib\net452\PCEFTPOS.API.IPInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

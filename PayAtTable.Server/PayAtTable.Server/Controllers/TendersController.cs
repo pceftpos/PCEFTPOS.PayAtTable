@@ -9,8 +9,7 @@ using System.Runtime.CompilerServices;
 using PayAtTable.Server.Data;
 using PayAtTable.Server.Models;
 using PayAtTable.API.Helpers;
-
-
+using PayAtTable.Server.Helpers;
 
 namespace PayAtTable.Server.Controllers
 {
@@ -19,16 +18,21 @@ namespace PayAtTable.Server.Controllers
     {
         protected static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
         protected readonly ITendersRepository _tendersRepository;
+        protected readonly IClientValidator _clientValidator;
 
-        public TendersController(ITendersRepository tendersRepository)
+        public TendersController(ITendersRepository tendersRepository, IClientValidator certificateValidator)
         {
             log.DebugEx("TendersController created");
             _tendersRepository = tendersRepository;
+            _clientValidator = certificateValidator;
         }
 
         [HttpPost, Route("tenders")]
         public HttpResponseMessage CreateTender([FromBody]PATRequest tenderRequest)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx(tr => tr.Set("POST ~/api/tenders", tenderRequest));
 
             // Extract the tender from the request
@@ -59,6 +63,9 @@ namespace PayAtTable.Server.Controllers
         [HttpPut, Route("tenders/{id}")]
         public HttpResponseMessage UpdateTender(string id, [FromBody]PATRequest tenderRequest)
         {
+            if (!_clientValidator.Validate(Request.GetClientCertificate(), Request.Headers.Authorization, out string message))
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, new UnauthorizedAccessException(message));
+
             log.DebugEx(tr => tr.Set("PUT ~/api/tenders", tenderRequest));
 
             // Extract the tender from the request

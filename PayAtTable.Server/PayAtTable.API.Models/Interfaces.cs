@@ -1,12 +1,5 @@
-﻿using System;
+﻿using PayAtTable.Server.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
-using PayAtTable.Server.Data;
-using PayAtTable.Server.Models;
-using PayAtTable.API.Helpers;
 
 namespace PayAtTable.Server.Data
 {
